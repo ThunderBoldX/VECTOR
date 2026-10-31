@@ -5,11 +5,10 @@
 **Твій телефон. Твій наступний контролер.**<br>
 Повертай телефон — кермуй. Нахиляй — керуй дроном. Створи власну розкладку кнопок.
 
-![Android 8.0+](https://img.shields.io/badge/Android-8.0%2B-bc80ff?style=flat-square&logo=android&logoColor=bc80ff&labelColor=17111f)
-![Windows 10/11 x64](https://img.shields.io/badge/Windows-10%2F11%20x64-bc80ff?style=flat-square&labelColor=17111f)
-[![Реліз](https://img.shields.io/github/v/release/ThunderBoldX/VECTOR?style=flat-square&color=bc80ff&labelColor=17111f)](https://github.com/ThunderBoldX/VECTOR/releases/latest)
-[![Перевірки](https://github.com/ThunderBoldX/VECTOR/actions/workflows/test.yml/badge.svg)](https://github.com/ThunderBoldX/VECTOR/actions/workflows/test.yml)
-[![MIT](https://img.shields.io/badge/license-MIT-83dcc9?style=flat-square&labelColor=17111f)](LICENSE)
+![Android 8.0+](docs/assets/badge-android.svg)
+![Windows 10/11 x64](docs/assets/badge-windows.svg)
+[![Release 0.6.0](docs/assets/badge-version.svg)](https://github.com/ThunderBoldX/VECTOR/releases/latest)
+[![MIT](docs/assets/badge-license.svg)](LICENSE)
 
 [English](README.md) · **🇺🇦 Українська**<br>
 [Завантажити](#завантажити) · [Скриншоти](#подивись-як-це-працює) · [Встановлення](docs/INSTALL_UK.md) · [Призначення](docs/CONTROLS.md) · [Збірка з коду](docs/DEVELOPMENT.md)
