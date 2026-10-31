@@ -1,0 +1,18 @@
+name: Tests
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  unit-and-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Unit and local UDP tests
+        run: npm test
+      - name: Documentation links and required media
+        run: python3 scripts/check-docs.py

@@ -1,0 +1,10 @@
+const test=require('node:test'),assert=require('node:assert/strict'),{Receiver,sign}=require('../windows/protocol.cjs'),C=require('../ui/core.js'),{cleanStore}=require('../windows/profiles.cjs');
+test('profile changes require authenticated revision confirmation and pause output',()=>{
+ let now=10000,applied=[],acks=[];const r=new Receiver({clock:()=>now,native:{xbox:true,state:s=>applied.push(s),release:()=>{}}});r.send=d=>acks.push(d);const remote={address:'127.0.0.1',port:19001};
+ r.setProfile(C.defaults());r.handle(Buffer.from(JSON.stringify({type:'pair',version:1,pin:r.pin,name:'Phone'})),remote);r.approve();
+ const send=(seq,rev)=>{now+=60;const payload=JSON.stringify({seq,configRevision:rev,screen:{width:851,height:393},paused:false,steer:.6,throttle:.8,brake:.2,keys:[],joy:[],axisKeys:[37,39,38,40],profile:'Phone untrusted name',time:now});r.handle(Buffer.from(JSON.stringify({type:'input',session:r.session.id,payload,mac:sign(r.session.key,payload)})),remote);};
+ send(1,0);r.enable(true);assert(!r.enabled);assert.equal(applied.length,0);const a=JSON.parse(acks.at(-1).payload);assert.equal(a.config.output,'xbox');assert.equal(a.configRevision,1);
+ send(2,1);r.enable(true);send(3,1);assert.equal(applied.length,1);assert.equal(applied[0].xbox.rt,.8);assert.equal(applied[0].xbox.lt,.2);assert.equal(r.snapshot().profile,'Автомобіль');assert.equal(r.snapshot().session.screen.width,851);
+ r.setProfile({...C.defaults(),gasAxis:'lt',brakeAxis:'rt'});assert(!r.enabled);send(4,1);assert.equal(applied.length,1);assert.equal(JSON.parse(acks.at(-1).payload).config.gasAxis,'lt');send(5,2);r.enable(true);send(6,2);assert.equal(applied[1].xbox.lt,.8);clearInterval(r.timer);
+});
+test('host store rejects duplicate IDs and nonfinite geometry',()=>{assert.throws(()=>cleanStore({profiles:[C.defaults(),C.defaults()],active:'racing'}));const s=cleanStore({profiles:[{...C.defaults(),width:'NaN',buttons:[{x:NaN,y:Infinity,w:0,h:9}]}]});assert.equal(s.profiles[0].width,844);assert.equal(s.profiles[0].buttons[0].h,.45);});

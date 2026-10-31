@@ -1,0 +1,7 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="318" height="22" viewBox="0 0 318 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Slider">
+<circle id="Thumb" cx="136" cy="11" r="7.5" fill="#EDF2F6" stroke="#C084FC" stroke-width="3"/>
+<rect id="Selected range" y="9" width="127" height="4" rx="2" fill="#C084FC"/>
+<rect id="Track" y="9" width="318" height="4" rx="2" fill="#342B44"/>
+</g>
+</svg>

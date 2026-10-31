@@ -1,0 +1,5 @@
+* text=auto
+*.png binary
+*.ttf binary
+*.apk binary
+*.exe binary
